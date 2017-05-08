@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1494241119 source:/data/Crawler_Test/application/main.cpp
+	"HTTPDownloader.h"
+	<iostream>
+	<string>
+
+1494241211 source:/data/Crawler_Test/application/HTTPDownloader.cpp
+	"HTTPDownloader.hpp"
+	<curl/curl.h>
+	<curl/easy.h>
+	<curl/curlbuild.h>
+	<sstream>
+	<iostream>
+
+1494240541 /data/Crawler_Test/application/HTTPDownloader.h
+	<string>
+
+1494241186 /data/Crawler_Test/application/HTTPDownloader.hpp
+	<string>
+
