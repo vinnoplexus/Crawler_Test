@@ -19,7 +19,6 @@ int main(int argc, char** argv) {
     HTTPDownloader downloader;
     std::string content = downloader.download("https://stackoverflow.com");
 
-    std::
 
     mongocxx::instance inst{};
     mongocxx::client conn{mongocxx::uri{}};
