@@ -4,6 +4,7 @@
 #include <bsoncxx/json.hpp>
 #include <mongocxx/client.hpp>
 #include <mongocxx/instance.hpp>
+#include <ctime>
 
 using bsoncxx::builder::stream::close_array;
 using bsoncxx::builder::stream::close_document;
@@ -15,6 +16,11 @@ using bsoncxx::builder::stream::open_document;
 
 
 int main(int argc, char** argv) {
+
+    const int MAXLEN = 80;
+    char s[MAXLEN];
+    time_t t = time(0);
+    strftime(s, MAXLEN, "%m-%d-%Y", localtime(&t));
 
     HTTPDownloader downloader;
 
@@ -30,11 +36,12 @@ int main(int argc, char** argv) {
         bsoncxx::builder::stream::document document{};
 
         auto collection = conn["test"]["testcollection"];
-        document << "body" << content;
+        document  << "Url" <<  URL << "Body" << content << "Crawled date" << s;
 
         collection.insert_one(document.view());
         auto cursor = collection.find({});
     }
+}
 
 
 /* code to print document in json
@@ -42,4 +49,3 @@ int main(int argc, char** argv) {
         std::cout << bsoncxx::to_json(doc) << std::endl;
     }
     */
-}
