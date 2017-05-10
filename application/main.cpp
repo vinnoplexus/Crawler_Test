@@ -14,12 +14,12 @@ using bsoncxx::builder::stream::open_document;
 
 
 
-
 int main(int argc, char** argv) {
 
     HTTPDownloader downloader;
     std::string content = downloader.download("https://stackoverflow.com");
-//    cout << content << std::endl;
+
+    std::
 
     mongocxx::instance inst{};
     mongocxx::client conn{mongocxx::uri{}};
@@ -27,12 +27,12 @@ int main(int argc, char** argv) {
     bsoncxx::builder::stream::document document{};
 
     auto collection = conn["test"]["testcollection"];
-    document << "hello" << "world";
+    document << "body" << content;
 
     collection.insert_one(document.view());
     auto cursor = collection.find({});
 
-    for (auto&& doc : cursor) {
-        std::cout << bsoncxx::to_json(doc) << std::endl;
-    }
+    //for (auto&& doc : cursor) {
+    //    std::cout << bsoncxx::to_json(doc) << std::endl;
+    //}
 }
