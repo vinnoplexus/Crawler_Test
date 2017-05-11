@@ -36,16 +36,21 @@ int main(int argc, char** argv) {
         bsoncxx::builder::stream::document document{};
 
         auto collection = conn["test"]["testcollection"];
-        document  << "Url" <<  URL << "Body" << content << "Crawled date" << s;
+        document  << "Url" <<  URL << "Body" << "" << "Crawled date" << s ;
 
         collection.insert_one(document.view());
+
         auto cursor = collection.find({});
+            for (auto&& doc : cursor) {
+            std::cout << bsoncxx::to_json(doc) << std::endl;
+            }
+
+//        auto collection_update = conn["test_update"]["testcollection_update"];
+//        collection.update_one(document << "Url" << "http://www.pfizer.com/" << finalize,
+//        document << "$set" << open_document << "Url" << "http123" << close_document << finalize);
     }
 }
 
 
 /* code to print document in json
-    for (auto&& doc : cursor) {
-        std::cout << bsoncxx::to_json(doc) << std::endl;
-    }
     */
